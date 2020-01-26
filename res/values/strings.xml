@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="none"></string>
+    <string name="app_name">Duty Day Calculator</string>
+    <color name="header">#014</color>
+    <string-array name="signs">
+        <item >+</item>
+        <item >-</item>
+    </string-array>
+    <color name="grey">#333</color>
+    <color name="black">#000</color>
+    <string name="edit_label">Profile Editor</string>
+
+</resources>
