@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.karson.android.dutydaycalculator"
+    android:versionCode="7"
+    android:versionName="1.5" >
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
+
+    <application
+
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name" >
+
+        <activity
+            android:name="OutputActivity" android:label="@string/app_name"
+            android:theme="@android:style/ThemeOverlay.Material.Dark">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/edit_label" android:name="EditorListActivity"
+            android:theme="@android:style/ThemeOverlay.Material.Dark"></activity>
+        <activity android:label="@string/edit_label" android:name="ProfileEditorActivity"
+            android:theme="@android:style/ThemeOverlay.Material.Dark"></activity>
+        <activity android:label="Time Difference Calculator" android:name="CalculatorActivity" android:icon="@drawable/calc_icon_dark"
+            android:theme="@android:style/Theme.Material.Dialog"></activity>
+    </application>
+
+</manifest>

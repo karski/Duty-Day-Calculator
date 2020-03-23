@@ -1,0 +1,183 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c4c90f7d87bbf37ef488d96d3fcdf4a\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4bdff072d8ef0a79a3f59c6158f9011a\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\59d6157536ab2b26bc882f50d6c4567f\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bb03446c14f22945e8cc5735fdeedfcc\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\03f7b0faee27193cecf3060d16679505\appcompat-resources-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b1e00229814b6c11ef955634080e8faa\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3d783d1f984ab4de3cb9ae9340668e3\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\cd23cbe9cac961ce208680fcf5d9c3d9\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b0d2ea07478a361b447e87e0eca4efc4\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3a1839ac5eb83d8293302b9c8277e67\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9aa296175abe8842a2c6ccdfb2db1bc1\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\36e0a97b17768e98f7d14e9a133e0504\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\8341f8b8c1cc36182082062cb6ee8b95\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\2a7fc6d8b0a74b8c2d907d5c96f2494b\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a85523d51d0a867221990aef1d474d8a\activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\81d56335d9fe927449b8e7df9987a201\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1c034d1d728869a2a11ef51cd2c30ddd\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1a6a0fe6e07c2cdc04fceed10487f610\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bf5e80b2bce8354b784117663105159f\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4b8940b7dd1b32b51ef63643399ec635\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\3bff5dc76b442bf493cc53444f4d276a\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9a02bfba61f31e60ff7fb854c0dba545\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\78df7321b333ac9d5a3ff6eb03e3aeac\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\c33573260f5b5a17ebaf6b8d9734c089\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+	package
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:3:5-51
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:5-80
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:22-78
+uses-permission-sdk-23#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:9:5-87
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:9:29-85
+application
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:13:5-34:19
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:22:5-20
+MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1c034d1d728869a2a11ef51cd2c30ddd\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1c034d1d728869a2a11ef51cd2c30ddd\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:17:9-41
+	android:roundIcon
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:16:9-54
+	android:icon
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:15:9-43
+activity#com.karson.android.dutydaycalculator.OutputActivity
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:19:9-27:20
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:20:43-75
+	android:theme
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:21:13-70
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:20:13-42
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:23:13-26:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:24:17-69
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:24:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:25:27-74
+activity#com.karson.android.dutydaycalculator.EditorListActivity
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:9-29:82
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:19-53
+	android:theme
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:29:13-70
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:54-87
+activity#com.karson.android.dutydaycalculator.ProfileEditorActivity
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:9-31:82
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:19-53
+	android:theme
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:31:13-70
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:54-90
+activity#com.karson.android.dutydaycalculator.CalculatorActivity
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:9-33:77
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:19-61
+	android:icon
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:96-135
+	android:theme
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:33:13-65
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:62-95
+uses-sdk
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c4c90f7d87bbf37ef488d96d3fcdf4a\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c4c90f7d87bbf37ef488d96d3fcdf4a\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4bdff072d8ef0a79a3f59c6158f9011a\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4bdff072d8ef0a79a3f59c6158f9011a\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\59d6157536ab2b26bc882f50d6c4567f\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\59d6157536ab2b26bc882f50d6c4567f\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bb03446c14f22945e8cc5735fdeedfcc\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bb03446c14f22945e8cc5735fdeedfcc\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\03f7b0faee27193cecf3060d16679505\appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\03f7b0faee27193cecf3060d16679505\appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b1e00229814b6c11ef955634080e8faa\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b1e00229814b6c11ef955634080e8faa\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3d783d1f984ab4de3cb9ae9340668e3\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3d783d1f984ab4de3cb9ae9340668e3\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\cd23cbe9cac961ce208680fcf5d9c3d9\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\cd23cbe9cac961ce208680fcf5d9c3d9\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b0d2ea07478a361b447e87e0eca4efc4\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\b0d2ea07478a361b447e87e0eca4efc4\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3a1839ac5eb83d8293302b9c8277e67\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a3a1839ac5eb83d8293302b9c8277e67\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9aa296175abe8842a2c6ccdfb2db1bc1\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9aa296175abe8842a2c6ccdfb2db1bc1\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\36e0a97b17768e98f7d14e9a133e0504\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\36e0a97b17768e98f7d14e9a133e0504\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\8341f8b8c1cc36182082062cb6ee8b95\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\8341f8b8c1cc36182082062cb6ee8b95\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\2a7fc6d8b0a74b8c2d907d5c96f2494b\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\2a7fc6d8b0a74b8c2d907d5c96f2494b\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a85523d51d0a867221990aef1d474d8a\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\a85523d51d0a867221990aef1d474d8a\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\81d56335d9fe927449b8e7df9987a201\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\81d56335d9fe927449b8e7df9987a201\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1c034d1d728869a2a11ef51cd2c30ddd\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1c034d1d728869a2a11ef51cd2c30ddd\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1a6a0fe6e07c2cdc04fceed10487f610\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\1a6a0fe6e07c2cdc04fceed10487f610\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bf5e80b2bce8354b784117663105159f\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\bf5e80b2bce8354b784117663105159f\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4b8940b7dd1b32b51ef63643399ec635\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4b8940b7dd1b32b51ef63643399ec635\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\3bff5dc76b442bf493cc53444f4d276a\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\3bff5dc76b442bf493cc53444f4d276a\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9a02bfba61f31e60ff7fb854c0dba545\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9a02bfba61f31e60ff7fb854c0dba545\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\78df7321b333ac9d5a3ff6eb03e3aeac\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\78df7321b333ac9d5a3ff6eb03e3aeac\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\c33573260f5b5a17ebaf6b8d9734c089\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\c33573260f5b5a17ebaf6b8d9734c089\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
