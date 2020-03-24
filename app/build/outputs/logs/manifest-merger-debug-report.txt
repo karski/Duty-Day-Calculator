@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c4c90f7d87bbf37ef488d96d3fcdf4a\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\4bdff072d8ef0a79a3f59c6158f9011a\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -30,9 +30,9 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\peter\.gradle\ca
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\9a02bfba61f31e60ff7fb854c0dba545\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\78df7321b333ac9d5a3ff6eb03e3aeac\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\c33573260f5b5a17ebaf6b8d9734c089\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:2:1-34:12
 	package
 		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:3:5-51
 		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
@@ -47,16 +47,16 @@ INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\A
 		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:4:5-28
 		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:5-80
+uses-permission-sdk-23#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:5-86
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:22-78
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:8:29-84
 uses-permission-sdk-23#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:9:5-87
 	android:name
 		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:9:29-85
 application
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:13:5-34:19
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:11:5-32:19
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\0c97876e4e5b77da1e8a21f807a758f2\material-1.1.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:24:5-89
@@ -66,55 +66,55 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\pe
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\peter\.gradle\caches\transforms-2\files-2.1\61f7e93738534f499e2f079bf7ced370\core-1.1.0\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:17:9-41
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:15:9-41
 	android:roundIcon
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:16:9-54
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:15:9-43
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:13:9-43
 activity#com.karson.android.dutydaycalculator.OutputActivity
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:19:9-27:20
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:17:9-25:20
 	android:label
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:20:43-75
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:18:43-75
 	android:theme
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:21:13-70
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:19:13-70
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:20:13-42
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:18:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:23:13-26:29
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:21:13-24:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:24:17-69
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:22:17-69
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:24:25-66
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:22:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:25:17-77
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:25:27-74
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:23:27-74
 activity#com.karson.android.dutydaycalculator.EditorListActivity
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:26:9-27:82
+	android:label
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:26:19-53
+	android:theme
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:27:13-70
+	android:name
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:26:54-87
+activity#com.karson.android.dutydaycalculator.ProfileEditorActivity
 ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:9-29:82
 	android:label
 		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:19-53
 	android:theme
 		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:29:13-70
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:54-87
-activity#com.karson.android.dutydaycalculator.ProfileEditorActivity
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:9-31:82
-	android:label
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:19-53
-	android:theme
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:31:13-70
-	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:54-90
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:28:54-90
 activity#com.karson.android.dutydaycalculator.CalculatorActivity
-ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:9-33:77
+ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:9-31:77
 	android:label
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:19-61
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:19-61
 	android:icon
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:96-135
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:96-135
 	android:theme
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:33:13-65
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:31:13-65
 	android:name
-		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:32:62-95
+		ADDED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml:30:62-95
 uses-sdk
 INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\peter\StudioProjects\Duty Day Calculator 3\app\src\main\AndroidManifest.xml

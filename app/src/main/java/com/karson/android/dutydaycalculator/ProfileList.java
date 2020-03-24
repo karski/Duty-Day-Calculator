@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -19,7 +20,7 @@ public class ProfileList {
 	public List<ProfileClass> profileList = new ArrayList<ProfileClass>();
 
 	public void exportList(String filename, List<ProfileClass> list,
-			Context context) {
+						   Context context, Activity thisActivity) {
 		try {
 			OutputStream fos = new BufferedOutputStream(context.openFileOutput(filename,
 					Context.MODE_PRIVATE));
@@ -33,7 +34,8 @@ public class ProfileList {
 		}
 	}
 
-	public List<ProfileClass> importList(String filename, Context context) {
+	//This should be used to import from internal storage (private storage, not an external file)
+	public List<ProfileClass> importList(String filename, Context context,Activity thisActivity) {
 		List<ProfileClass> newList = new ArrayList<ProfileClass>();
 		try {
 			InputStream fis = new BufferedInputStream(context.openFileInput(filename));
@@ -54,14 +56,14 @@ public class ProfileList {
 		}
 	}
 
-	public List<ProfileClass> importReadableList(File filename, Context context) {
+	public List<ProfileClass> importReadableList(File filename, Context context,Activity thisActivity) {
 		List<ProfileClass> newList = new ArrayList<ProfileClass>();
 		try {
 			InputStream fis = new BufferedInputStream(new FileInputStream(filename));
 			DataInputStream in = new DataInputStream(fis);
 			try {
 				while (true) {// keep looping until a null profile is returned
-					ProfileClass newProf = new ProfileClass(in, true);
+					ProfileClass newProf = new ProfileClass(in,thisActivity);
 					newList.add(newProf);
 				}
 			} catch (Exception e) {
@@ -92,7 +94,7 @@ public class ProfileList {
 	}
 
 	// reset all profiles to the default
-	public void resetWithDefault(Context context) {
+	public void resetWithDefault(Context context,Activity thisActivity) {
 		profileList = new ArrayList<ProfileClass>();
 		// C-17 basic profile Airland
 		ProfileClass profile = new ProfileClass("C-17 Basic Airland");
@@ -261,7 +263,7 @@ public class ProfileList {
 		profile.addRow("FDP", true, 25, 0);
 		profile.addRow("CDT", true, 25, 45);
 		profileList.add(profile);
-		exportList(PROFILESTORAGE, profileList, context);
+		exportList(PROFILESTORAGE, profileList, context,thisActivity);
 	}
 
 }

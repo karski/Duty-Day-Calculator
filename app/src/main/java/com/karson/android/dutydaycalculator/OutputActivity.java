@@ -1,15 +1,13 @@
 package com.karson.android.dutydaycalculator;
 
-import android.app.ActionBar;
-import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.TimeZone;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,11 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,8 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ import java.util.Set;
 
 //import android.widget.Spinner;
 
-public class OutputActivity extends FragmentActivity {
+public class OutputActivity extends FragmentActivity{
     public static final String PREFS = "DutyDayPrefs";
     private static final int TIMEDIALOG = 0;
     public static final int EMPTYLISTDIALOG = 1;
@@ -59,7 +58,7 @@ public class OutputActivity extends FragmentActivity {
     boolean autoTZ = false;
     ArrayList<TimezoneEntry> timezoneList = new ArrayList<TimezoneEntry>();
     public static ProfileList profiles = new ProfileList();
-
+    Spinner navSpinner;
 
     public static class TimeDialog extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
         @NonNull
@@ -81,15 +80,6 @@ public class OutputActivity extends FragmentActivity {
     }
 
 
-    //TODO: replace old actionbar nav
-    OnNavigationListener actionNav = new OnNavigationListener() {
-        public boolean onNavigationItemSelected(int itemPosition,
-                                                long itemId) {
-            update();
-            return false;
-        }
-    };
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -110,8 +100,22 @@ public class OutputActivity extends FragmentActivity {
                 });
 
         //set up action bar drop down navigation
+        navSpinner = new Spinner(this,Spinner.MODE_DROPDOWN);
+        navSpinner.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+        navSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                update();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                update();
+            }
+        });
+
+        getActionBar().setCustomView(navSpinner);
+
+        getActionBar().setDisplayShowCustomEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
-        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        //getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
 
         ArrayList<TimezoneEntry> tzList = new ArrayList<TimezoneEntry>();
@@ -232,11 +236,8 @@ public class OutputActivity extends FragmentActivity {
         edit.putInt("timezone", timezoneIndex);
         edit.putBoolean("alertMode", alertMode);
         edit.putBoolean("autoTimezoneMode", autoTZ);
-        //edit.putInt("selectedprof",
-        //		((Spinner) findViewById(R.id.profileSelectionSpinner))
-        //				.getSelectedItemPosition());
-        edit.putInt("selectedprof", getActionBar().getSelectedNavigationIndex());
-        Log.d("DDC", "saving selected profile position " + getActionBar().getSelectedNavigationIndex());
+        edit.putInt("selectedprof", navSpinner.getSelectedItemPosition());
+        Log.d("DDC", "saving selected profile position " + navSpinner.getSelectedItemPosition());
         edit.commit();
     }
 
@@ -244,7 +245,7 @@ public class OutputActivity extends FragmentActivity {
     public void onDestroy() {
         super.onDestroy();
         // make sure that profiles are preserved if closed unexpectedly
-        profiles.exportList(profiles.PROFILESTORAGE, profiles.profileList, this);
+        profiles.exportList(profiles.PROFILESTORAGE, profiles.profileList, this,this);
     }
 
 
@@ -275,10 +276,8 @@ public class OutputActivity extends FragmentActivity {
         table.removeAllViews();
 
         // generate calculated output
-        //Spinner spinner = (Spinner) findViewById(R.id.profileSelectionSpinner);
         try {
-            ProfileClass prof = profiles.profileList.get(getActionBar().
-                    getSelectedNavigationIndex());
+            ProfileClass prof = profiles.profileList.get(navSpinner.getSelectedItemPosition());
             Calendar zoneCalendar = (Calendar) calendar.clone();
             zoneCalendar.add(Calendar.HOUR_OF_DAY, displayedTimezone.offsetHours);
             zoneCalendar.add(Calendar.MINUTE, (displayedTimezone.currentOffset >= 0 ? 1 : -1) * displayedTimezone.offsetMinutes);
@@ -309,7 +308,7 @@ public class OutputActivity extends FragmentActivity {
         // load saved profile list
         try {
             profiles.profileList = profiles.importList(
-                    ProfileList.PROFILESTORAGE, this);
+                    ProfileList.PROFILESTORAGE, this,this);
         } catch (Exception e) {
             Log.d("Load err", e.toString());
         }
@@ -320,7 +319,7 @@ public class OutputActivity extends FragmentActivity {
             // Add the buttons
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    profiles.resetWithDefault(getApplicationContext());
+                    profiles.resetWithDefault(getApplicationContext(),OutputActivity.this);
                     createProfiles();
                 }
             });
@@ -334,9 +333,9 @@ public class OutputActivity extends FragmentActivity {
             dialog.show();
         }
         //make sure selected item is still in the list
-        Log.d("ACK", "compare " + getActionBar().getNavigationItemCount() + " <= " + prefs.getInt("selectedprof", 0));
-        Log.d("ACK", "or " + profiles.profileList.size() + " <= " + getActionBar().getSelectedNavigationIndex());
-        if (profiles.profileList.size() <= getActionBar().getSelectedNavigationIndex()) {
+        Log.d("ACK", "compare " + navSpinner.getCount() + " <= " + prefs.getInt("selectedprof", 0));
+        Log.d("ACK", "or " + profiles.profileList.size() + " <= " + navSpinner.getSelectedItemPosition());
+        if (profiles.profileList.size() <= navSpinner.getSelectedItemPosition()) {
             Log.d("DDC", "CreateProfiles found index error");
             SharedPreferences.Editor edit = prefs.edit();
             edit.putInt("selectedprof", 0);
@@ -352,9 +351,9 @@ public class OutputActivity extends FragmentActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, nameList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getActionBar().setListNavigationCallbacks(adapter, actionNav);
+        navSpinner.setAdapter(adapter);
         try {
-            getActionBar().setSelectedNavigationItem(prefs.getInt("selectedprof", 0));
+            navSpinner.setSelection(prefs.getInt("selectedprof", 0));
         } catch (Exception e) {
             Log.d("DDC", "spinner assignment error " + e.toString());
         }

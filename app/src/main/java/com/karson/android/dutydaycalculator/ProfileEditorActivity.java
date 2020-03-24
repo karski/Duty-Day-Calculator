@@ -1,8 +1,10 @@
 package com.karson.android.dutydaycalculator;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,6 +20,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import java.io.DataOutputStream;
@@ -74,7 +78,7 @@ public class ProfileEditorActivity extends FragmentActivity implements OnClickLi
         int iAlert = profile.getIndexOfAlert(-1);
         int iTakeoff = profile.getIndexOfTakeoff(-1);
         for (int i = 0; i < profile.getLength(); i++) {
-            if(i == iAlert || i==iTakeoff){ //use protected row
+            if (i == iAlert || i == iTakeoff) { //use protected row
                 TableRow row = (TableRow) LayoutInflater.from(this).inflate(
                         R.layout.editprotectedrowtemplate, null);
                 ((TextView) row.findViewById(R.id.editRowName)).setText(profile
@@ -86,7 +90,7 @@ public class ProfileEditorActivity extends FragmentActivity implements OnClickLi
                 ((TextView) row.findViewById(R.id.editRowDeltaTimeMinute))
                         .setText("" + profile.getRowMinutes(i));
                 table.addView(row);
-            }else { //use editable row
+            } else { //use editable row
                 TableRow row = (TableRow) LayoutInflater.from(this).inflate(
                         R.layout.editrowtemplate, null);
                 ((TextView) row.findViewById(R.id.editRowName)).setText(profile
@@ -162,7 +166,7 @@ public class ProfileEditorActivity extends FragmentActivity implements OnClickLi
         }
         // save all changes to file
         OutputActivity.profiles.exportList(ProfileList.PROFILESTORAGE,
-                OutputActivity.profiles.profileList, this);
+                OutputActivity.profiles.profileList, this, ProfileEditorActivity.this);
         return edited;
     }
 
@@ -204,29 +208,56 @@ public class ProfileEditorActivity extends FragmentActivity implements OnClickLi
                 finish();
                 return true;
             case MENUEXPORT:
-                ProfileClass profile = saveProfile();
-                // export file named after profile to a default location
-                try {
-                    File path = new File(Environment.getExternalStorageDirectory(),
-                            "Duty Day Calculator");
-                    path.mkdir();
-                    File filepath = new File(path, profile.getProfileName()
-                            + ".txt");
-                    FileOutputStream fos = new FileOutputStream(filepath);
-                    DataOutputStream out = new DataOutputStream(fos);
-                    profile.exportToReadableFile(out);
-                    fos.close();
-                    Toast.makeText(this,
-                            "Profile saved to:" + '\n' + filepath.toString(),
-                            Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Log.d("SAVE", "save err: " + e.toString());
-                    Toast.makeText(this, "Error Saving Profile", Toast.LENGTH_SHORT)
-                            .show();
-                }
+                exportProfile();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MENUEXPORT: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //permissions were granted after prompting, perform action again
+                    exportProfile();
+                } else {
+                    Toast.makeText(this, "Cannot export without Storage Permissions", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+    private void exportProfile(){
+        ProfileClass profile = saveProfile();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MENUEXPORT);
+        } else {
+            // export file named after profile to a default location
+            try {
+                File path = new File(Environment.getExternalStorageDirectory(),
+                        "Duty Day Calculator");
+                path.mkdir();
+                File filepath = new File(path, profile.getProfileName()
+                        + ".txt");
+                FileOutputStream fos = new FileOutputStream(filepath);
+                DataOutputStream out = new DataOutputStream(fos);
+                profile.exportToReadableFile(out, this);
+                fos.close();
+                Toast.makeText(this,
+                        "Profile saved to:" + '\n' + filepath.toString(),
+                        Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Log.d("SAVE", "save err: " + e.toString());
+                Toast.makeText(this, "Error Saving Profile", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
     }
 
     DialogInterface.OnClickListener defaultsDialogListener = new DialogInterface.OnClickListener() {
@@ -243,7 +274,7 @@ public class ProfileEditorActivity extends FragmentActivity implements OnClickLi
                         OutputActivity.profiles.exportList(
                                 ProfileList.PROFILESTORAGE,
                                 OutputActivity.profiles.profileList,
-                                getApplicationContext());
+                                getApplicationContext(), ProfileEditorActivity.this);
                     }
                     save = false;
                     finish();

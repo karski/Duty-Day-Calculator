@@ -1,13 +1,22 @@
 package com.karson.android.dutydaycalculator;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class ProfileClass {
 
@@ -30,18 +39,18 @@ public class ProfileClass {
     }
 
     //add the default entries into a profile
-    public void initializeProfile(){
-        if(getIndexOfAlert(-1)<0){
-            addRow("Alert",true,0,0);
+    public void initializeProfile() {
+        if (getIndexOfAlert(-1) < 0) {
+            addRow("Alert", true, 0, 0);
         }
-        if(getIndexOfTakeoff(-1)<0){
-            addRow("Takeoff",true,0,0);
+        if (getIndexOfTakeoff(-1) < 0) {
+            addRow("Takeoff", true, 0, 0);
         }
     }
 
     public void addRow(String name, boolean isAfterShow, int hours, int minutes) {
         // make sure values are within range and not reserved
-        if (hours >= 0 && minutes >= 0 && minutes < 60){// && name != "Alert" && name != "Takeoff") {
+        if (hours >= 0 && minutes >= 0 && minutes < 60) {// && name != "Alert" && name != "Takeoff") {
             int afterShow = 1;
             if (!isAfterShow) {
                 afterShow = -1;
@@ -76,30 +85,30 @@ public class ProfileClass {
 
     // Return index of the row that has the entry "Alert"
     public int getIndexOfAlert(int defaultIndex) {
-        int result= rowNames.indexOf("Alert");
-        if(result<0){
-            for(int i=0;i<rowNames.size();i++){
-                if(rowNames.get(i).toLowerCase().contains("alert")){
+        int result = rowNames.indexOf("Alert");
+        if (result < 0) {
+            for (int i = 0; i < rowNames.size(); i++) {
+                if (rowNames.get(i).toLowerCase().contains("alert")) {
                     return i;
                 }
             }
             return defaultIndex; //full search did not turn up a correct entry, use the first one
-        }else{
+        } else {
             return result; //indexOf had valid result
         }
     }
 
     // Return index of the row that has the entry "Takeoff"
     public int getIndexOfTakeoff(int defaultIndex) {
-        int result= rowNames.indexOf("Takeoff");
-        if(result<0){
-            for(int i=0;i<rowNames.size();i++){
-                if(rowNames.get(i).toLowerCase().contains("takeoff")){
+        int result = rowNames.indexOf("Takeoff");
+        if (result < 0) {
+            for (int i = 0; i < rowNames.size(); i++) {
+                if (rowNames.get(i).toLowerCase().contains("takeoff")) {
                     return i;
                 }
             }
             return defaultIndex; //full search did not turn up a correct entry, use the first one
-        }else{
+        } else {
             return result; //indexOf had valid result
         }
     }
@@ -144,28 +153,28 @@ public class ProfileClass {
 
 
     public String getRowDeltaTimeString(int index, boolean alertMode) {
-        int correctedMinutes = (rowValues.get(index)[AFTERINDEX]*rowValues.get(index)[MINUTEINDEX]) - (rowValues.get(getIndexOfBaseline(alertMode))[AFTERINDEX] * rowValues.get(getIndexOfBaseline(alertMode))[MINUTEINDEX]);
-        int correctedHours = (rowValues.get(index)[AFTERINDEX]*rowValues.get(index)[HOURINDEX]) - (rowValues.get(getIndexOfBaseline(alertMode))[AFTERINDEX] * rowValues.get(getIndexOfBaseline(alertMode))[HOURINDEX]);
+        int correctedMinutes = (rowValues.get(index)[AFTERINDEX] * rowValues.get(index)[MINUTEINDEX]) - (rowValues.get(getIndexOfBaseline(alertMode))[AFTERINDEX] * rowValues.get(getIndexOfBaseline(alertMode))[MINUTEINDEX]);
+        int correctedHours = (rowValues.get(index)[AFTERINDEX] * rowValues.get(index)[HOURINDEX]) - (rowValues.get(getIndexOfBaseline(alertMode))[AFTERINDEX] * rowValues.get(getIndexOfBaseline(alertMode))[HOURINDEX]);
 
         String result = "";
 
-        if(correctedMinutes>=60){
-            correctedHours += Math.floor(correctedMinutes/60);
-        }else if(correctedMinutes<=-60){
-            correctedHours -= Math.floor(Math.abs(correctedMinutes)/60);
+        if (correctedMinutes >= 60) {
+            correctedHours += Math.floor(correctedMinutes / 60);
+        } else if (correctedMinutes <= -60) {
+            correctedHours -= Math.floor(Math.abs(correctedMinutes) / 60);
         }
-        correctedMinutes = correctedMinutes%60;
-        if(correctedMinutes<0 && correctedHours >0){
-            correctedHours -=1;
+        correctedMinutes = correctedMinutes % 60;
+        if (correctedMinutes < 0 && correctedHours > 0) {
+            correctedHours -= 1;
             correctedMinutes += 60;
         }
 
-        if (correctedHours <0 || (correctedHours == 0 && correctedMinutes<0)) {
+        if (correctedHours < 0 || (correctedHours == 0 && correctedMinutes < 0)) {
             result += "-";
         } else {
             result += "+";
         }
-        result += Math.abs(correctedHours) + "+" + (Math.abs(correctedMinutes)<10?"0":"") + Math.abs(correctedMinutes);
+        result += Math.abs(correctedHours) + "+" + (Math.abs(correctedMinutes) < 10 ? "0" : "") + Math.abs(correctedMinutes);
         return result;
     }
 
@@ -232,68 +241,81 @@ public class ProfileClass {
             // catch file errors
             Log.d("Profile Out err", "output " + e.toString());
         }
-
     }
 
     // Create a profile class from user readable input
-    // readable param is only there to differentiate from non-readable
     // constructor
-    public ProfileClass(DataInputStream in, boolean readable) throws Exception {
-        try {
-            String input = in.readLine();
-            if (input.equals("--NEW PROFILE--")) {
-                name = in.readLine().substring(14);// profile name without
-                // readable prefix
+    public ProfileClass(DataInputStream in,Activity thisActivity) throws Exception {
+        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    0);
+        }else {
+            try {
+                BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+                String input = bin.readLine();
+                if (input.equals("--NEW PROFILE--")) {
+                    name = bin.readLine().substring(14);// profile name without
+                    // readable prefix
 
-                Log.d("profile IN", name);
-                in.readLine();// trash formatting line
-                while (true) {// loop until end of file
-                    String row = in.readLine();
-                    if (row.equals("--END PROFILE--")) {
-                        break;// don't continue through more profiles
+                    Log.d("profile IN", name);
+                    bin.readLine();// trash formatting line
+                    while (true) {// loop until end of file
+                        String row = bin.readLine();
+                        if (row.equals("--END PROFILE--")) {
+                            break;// don't continue through more profiles
+                        }
+                        String[] rowInfo = row.split("\\|");
+                        int after = Integer.parseInt(rowInfo[1]);
+                        int hour = Integer.parseInt(rowInfo[2]);
+                        int minute = Integer.parseInt(rowInfo[3]);
+                        addRow(rowInfo[0], (after == 1), hour, minute);
                     }
-                    String[] rowInfo = row.split("\\|");
-                    int after = Integer.parseInt(rowInfo[1]);
-                    int hour = Integer.parseInt(rowInfo[2]);
-                    int minute = Integer.parseInt(rowInfo[3]);
-                    addRow(rowInfo[0], (after == 1), hour, minute);
+                    initializeProfile();
+                } else {
+                    throw new Exception("no profile found");
                 }
-                initializeProfile();
-            } else {
+            } catch (EOFException e) {
+                Log.i("Profile In", "End of file reached");
                 throw new Exception("no profile found");
+            } catch (Exception e) {
+                Log.d("Profile IN err", "input " + e.toString());
+                throw new Exception("error importing profile: " + e.toString());
             }
-        } catch (EOFException e) {
-            Log.i("Profile In", "End of file reached");
-            throw new Exception("no profile found");
-        } catch (Exception e) {
-            Log.d("Profile IN err", "input " + e.toString());
-            throw new Exception("error importing profile: " + e.toString());
         }
     }
 
     // generate user-readable file
-    public void exportToReadableFile(DataOutputStream out) {
-        try {
-            // generate output in file for the profile
-            out.write(("--NEW PROFILE--" + '\n').getBytes());
-            out.write(("Profile Name: " + name + '\n').getBytes());
-            out.write(("Row Name|afterAlert=1 before=-1|hours|minutes" + '\n')
-                    .getBytes());// format explanation line
-            for (int i = 0; i < rowNames.size(); i++) {
+    public void exportToReadableFile(DataOutputStream out,Activity thisActivity) {
+        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    0);
+        } else {
+            try {
+                // generate output in file for the profile
+                out.write(("--NEW PROFILE--" + '\n').getBytes());
+                out.write(("Profile Name: " + name + '\n').getBytes());
+                out.write(("Row Name|afterAlert=1 before=-1|hours|minutes" + '\n')
+                        .getBytes());// format explanation line
+                for (int i = 0; i < rowNames.size(); i++) {
 
-                out.write((rowNames.get(i) + '|'
-                        + rowValues.get(i)[AFTERINDEX] + '|'
-                        + rowValues.get(i)[HOURINDEX] + '|'
-                        + rowValues.get(i)[MINUTEINDEX] + '\n').getBytes());
+                    out.write((rowNames.get(i) + '|'
+                            + rowValues.get(i)[AFTERINDEX] + '|'
+                            + rowValues.get(i)[HOURINDEX] + '|'
+                            + rowValues.get(i)[MINUTEINDEX] + '\n').getBytes());
 
+                }
+                out.write(("--END PROFILE--" + '\n').getBytes());
+                Log.d("OUTPUT", "print to readable complete for profile " + name);
+            } catch (Exception e) {
+                // catch file errors
+                Log.d("Profile Out err", "output " + e.toString());
             }
-            out.write(("--END PROFILE--" + '\n').getBytes());
-            Log.d("OUTPUT", "print to readable complete for profile " + name);
-        } catch (Exception e) {
-            // catch file errors
-            Log.d("Profile Out err", "output " + e.toString());
-        }
 
+        }
     }
 
 }
