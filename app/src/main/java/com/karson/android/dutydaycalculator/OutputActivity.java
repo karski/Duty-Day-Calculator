@@ -7,8 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.TimeZone;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.AndroidException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,8 +65,9 @@ public class OutputActivity extends FragmentActivity{
         @Override
         public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
             super.onCreateDialog(savedInstanceState);
+
             //return new TimePickerDialog(getActivity(), this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true);
-            return new TimePickerDialog(getActivity(), this, getArguments().getInt("hour"), getArguments().getInt("minute"), true);
+            return new TimePickerDialog(getActivity(),android.R.style.Theme_Material_Dialog, this, getArguments().getInt("hour"), getArguments().getInt("minute"), true);
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -94,6 +95,7 @@ public class OutputActivity extends FragmentActivity{
                         params.putInt("hour", calendar.get(Calendar.HOUR_OF_DAY));
                         params.putInt("minute", calendar.get(Calendar.MINUTE));
                         TimeDialog timeFrag = new TimeDialog();  //new TimeDialog();
+                        timeFrag.setStyle(DialogFragment.STYLE_NORMAL,android.R.style.Theme_DeviceDefault_Light);
                         timeFrag.setArguments(params);
                         timeFrag.show(getSupportFragmentManager(), "TimePicker");
                     }
@@ -188,7 +190,6 @@ public class OutputActivity extends FragmentActivity{
 
         // assign action to auto timezone switch
         final Switch autoTimezoneSwitch = (Switch) findViewById(R.id.timeZoneAutoSwitch);
-        autoTimezoneSwitch.setChecked(autoTZ);
         autoTimezoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 autoTZ = isChecked;
@@ -241,12 +242,13 @@ public class OutputActivity extends FragmentActivity{
         edit.commit();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // make sure that profiles are preserved if closed unexpectedly
-        profiles.exportList(profiles.PROFILESTORAGE, profiles.profileList, this,this);
-    }
+    //I don't think we need to save profile list at exit if we're doing while the app is in use
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        // make sure that profiles are preserved if closed unexpectedly
+//        profiles.exportList(profiles.PROFILESTORAGE, profiles.profileList, this);
+//    }
 
 
     private void update() {
@@ -256,6 +258,8 @@ public class OutputActivity extends FragmentActivity{
         modeToggle.setText((alertMode ? "Alert" : "Takeoff") + " Time:");
         TextView alertTime = (TextView) findViewById(R.id.outputTimeDisplay);
         alertTime.setText(timeformat.format(calendar.getTime()) + "Z");
+        Switch autoTimezoneSwitch = (Switch) findViewById(R.id.timeZoneAutoSwitch);
+        autoTimezoneSwitch.setChecked(autoTZ);
         SeekBar zoneBar = (SeekBar) findViewById(R.id.timeZoneBar);
         zoneBar.setEnabled(!autoTZ);
         if (autoTZ) {
@@ -274,6 +278,11 @@ public class OutputActivity extends FragmentActivity{
         // clear out all old entries
         TableLayout table = (TableLayout) findViewById(R.id.outputTable);
         table.removeAllViews();
+
+        //reset spinner position as required
+        if(navSpinner.getSelectedItemPosition()>=profiles.profileList.size() || navSpinner.getSelectedItemPosition()<0){
+            navSpinner.setSelection(0);
+        }
 
         // generate calculated output
         try {
@@ -308,7 +317,7 @@ public class OutputActivity extends FragmentActivity{
         // load saved profile list
         try {
             profiles.profileList = profiles.importList(
-                    ProfileList.PROFILESTORAGE, this,this);
+                    ProfileList.PROFILESTORAGE, this);
         } catch (Exception e) {
             Log.d("Load err", e.toString());
         }
@@ -335,7 +344,7 @@ public class OutputActivity extends FragmentActivity{
         //make sure selected item is still in the list
         Log.d("ACK", "compare " + navSpinner.getCount() + " <= " + prefs.getInt("selectedprof", 0));
         Log.d("ACK", "or " + profiles.profileList.size() + " <= " + navSpinner.getSelectedItemPosition());
-        if (profiles.profileList.size() <= navSpinner.getSelectedItemPosition()) {
+        if (prefs.getInt("selectedprof", 0)>=profiles.profileList.size()) {
             Log.d("DDC", "CreateProfiles found index error");
             SharedPreferences.Editor edit = prefs.edit();
             edit.putInt("selectedprof", 0);

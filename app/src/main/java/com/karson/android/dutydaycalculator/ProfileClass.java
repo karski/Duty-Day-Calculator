@@ -246,12 +246,12 @@ public class ProfileClass {
     // Create a profile class from user readable input
     // constructor
     public ProfileClass(DataInputStream in,Activity thisActivity) throws Exception {
-        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
-            ActivityCompat.requestPermissions(thisActivity,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    0);
-        }else {
+//        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+//            ActivityCompat.requestPermissions(thisActivity,
+//                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                    0);
+//        }else {
             try {
                 BufferedReader bin = new BufferedReader(new InputStreamReader(in));
                 String input = bin.readLine();
@@ -283,17 +283,17 @@ public class ProfileClass {
                 Log.d("Profile IN err", "input " + e.toString());
                 throw new Exception("error importing profile: " + e.toString());
             }
-        }
+        //}
     }
 
     // generate user-readable file
     public void exportToReadableFile(DataOutputStream out,Activity thisActivity) {
-        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
-            ActivityCompat.requestPermissions(thisActivity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    0);
-        } else {
+//        if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+//            ActivityCompat.requestPermissions(thisActivity,
+//                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                    0);
+//        } else {
             try {
                 // generate output in file for the profile
                 out.write(("--NEW PROFILE--" + '\n').getBytes());
@@ -315,7 +315,7 @@ public class ProfileClass {
                 Log.d("Profile Out err", "output " + e.toString());
             }
 
-        }
+//        }
     }
 
 }

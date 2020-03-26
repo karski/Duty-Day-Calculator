@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -47,7 +50,7 @@ public class EditorListActivity extends Activity {
     public static final int MENUDELETE = 3;
     public static final int MENUEDIT = 4;
     public static final int MENUNEW = 5;
-    public static final int MENUEXPORTALL=6;
+    public static final int MENUEXPORTALL = 6;
     int contextPos = -1; //stores context position for interrupted context menu exports (to get file permissions)
 
     @Override
@@ -92,6 +95,13 @@ public class EditorListActivity extends Activity {
     }
 
     private void refresh() {
+        //if profile list isn't initialized, get out of here!
+        if(OutputActivity.profiles == null){
+            Intent intent = new Intent(this, EditorListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        //this won't be available if cleared from memory!
         List<String> nameList = new ArrayList<String>();
         for (ProfileClass profile : OutputActivity.profiles.profileList) {
             nameList.add(profile.getProfileName());
@@ -126,23 +136,29 @@ public class EditorListActivity extends Activity {
                 startActivity(intent);
                 return true;
             case MENUEXPORT:
-
+                contextPos = position;
+                Intent exportIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                exportIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                exportIntent.setType("text/plain");
+                exportIntent.putExtra(Intent.EXTRA_TITLE, OutputActivity.profiles.profileList.get(position).getProfileName()+".txt");
+                startActivityForResult(exportIntent, MENUEXPORT);
                 // export file named after profile to a default location
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
-                	contextPos = position; //save position for picking this back up if granted
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MENUEXPORT);
-                }else {
-					exportSingleProfile(position);
-				}
+                // all these checks aren't necessary - using shared storage
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+//                	contextPos = position; //save position for picking this back up if granted
+//                    ActivityCompat.requestPermissions(this,
+//                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                            MENUEXPORT);
+//                }else {
+//					exportSingleProfile(position);
+//				}
                 return true;
             case MENUDELETE:
                 OutputActivity.profiles.profileList.remove(position);
                 // save change to file
                 OutputActivity.profiles.exportList(ProfileList.PROFILESTORAGE,
-                        OutputActivity.profiles.profileList, this, this);
+                        OutputActivity.profiles.profileList, this);
                 refresh();
                 return true;
             default:
@@ -183,24 +199,33 @@ public class EditorListActivity extends Activity {
                 startActivity(editIntent);
                 return true;
             case MENUEXPORTALL:
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MENUEXPORTALL);
-                } else {
-                    exportList();
-                }
+                Intent exportIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                exportIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                exportIntent.setType("text/plain");
+                exportIntent.putExtra(Intent.EXTRA_TITLE, "Duty Day Profiles.txt");
+                startActivityForResult(exportIntent, MENUEXPORTALL);
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+//                    ActivityCompat.requestPermissions(this,
+//                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                            MENUEXPORTALL);
+//                } else {
+//                    exportList();
+//                }
                 return true;
             case MENUIMPORT:
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            MENUIMPORT);
-                } else {
-                    createDialog(FILEDIALOG).show();
-                }
+                Intent importIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                importIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                importIntent.setType("text/plain");
+                startActivityForResult(importIntent, MENUIMPORT);
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+//                        != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+//                    ActivityCompat.requestPermissions(this,
+//                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                            MENUIMPORT);
+//                } else {
+//                    createDialog(FILEDIALOG).show();
+//                }
                 return true;
             case MENURESET:
                 createDialog(RESETDIALOG).show();
@@ -209,98 +234,179 @@ public class EditorListActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    //only call this after permissions have been checked and granted
-    private void exportList() {
-        try {
-            File path = new File(Environment.getExternalStorageDirectory(),
-                    "Duty Day Calculator");
-            path.mkdir();
-            File filepath = new File(path, "Profiles.txt");
-            OutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
-            DataOutputStream out = new DataOutputStream(fos);
-            for (ProfileClass profile : OutputActivity.profiles.profileList) {
-                profile.exportToReadableFile(out, this);
-            }
-            fos.close();
-            Toast.makeText(this,
-                    "Profiles saved to:" + '\n' + filepath.toString(),
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Log.d("SAVE", "save err: " + e.toString());
-            Toast.makeText(this, "Error Saving Profile - Check Storage Permissions", Toast.LENGTH_SHORT)
-                    .show();
-        }
-    }
-    private void exportSingleProfile(int position){
-    	if(position>=0 && position<OutputActivity.profiles.profileList.size()) {
-			try {
-				ProfileClass profile = OutputActivity.profiles.profileList
-						.get(position);
-				File path = new File(Environment.getExternalStorageDirectory(),
-						"Duty Day Calculator");
-				path.mkdir();
-				File filepath = new File(path, profile.getProfileName()
-						+ ".txt");
-				OutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
-				DataOutputStream out = new DataOutputStream(fos);
-				profile.exportToReadableFile(out, this);
-				fos.close();
-				Toast.makeText(this,
-						"Profile saved to:" + '\n' + filepath.toString(),
-						Toast.LENGTH_LONG).show();
-			} catch (Exception e) {
-				Log.d("SAVE", "save err: " + e.toString());
-				Toast.makeText(this, "Error Saving Profile - Check Storage Permissions", Toast.LENGTH_SHORT)
-						.show();
-			}
-		}else{
-			Toast.makeText(this, "Profile Not Exported - Select Export to Try Again", Toast.LENGTH_SHORT).show();
-		}
-	}
+//    //only call this after permissions have been checked and granted
+//    private void exportList() { //TODO: delete once replacement is working
+//        // if we want to use a file picker, this would allow it - unclear what it returns and how to capture...
+////        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+////        intent.addCategory(Intent.CATEGORY_OPENABLE);
+////        intent.setType("text/txt");
+////        intent.putExtra(Intent.EXTRA_TITLE, "test.txt");
+////        startActivityForResult(intent, MENUEXPORTALL);
+//        try {
+////            File path = new File(getExternalFilesDir()
+////                    "Duty Day Calculator");//no longer needed with app-scoped storage
+////            path.mkdir();
+//            File filepath = new File(getExternalFilesDir(null), "Profiles.txt");
+//            OutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
+//            DataOutputStream out = new DataOutputStream(fos);
+//            for (ProfileClass profile : OutputActivity.profiles.profileList) {
+//                profile.exportToReadableFile(out, this);
+//            }
+//            out.close();
+//            fos.close();
+//            Toast.makeText(this,
+//                    "Profiles saved to:" + '\n' + filepath.toString(),
+//                    Toast.LENGTH_LONG).show();
+//        } catch (Exception e) {
+//            Log.d("SAVE", "save err: " + e.toString());
+//            Toast.makeText(this, "Error Saving Profile - Check Storage Permissions", Toast.LENGTH_SHORT)
+//                    .show();
+//        }
+//    }
+//
+//    private void exportSingleProfile(int position) {
+//        if (position >= 0 && position < OutputActivity.profiles.profileList.size()) {
+//            try {
+//                ProfileClass profile = OutputActivity.profiles.profileList
+//                        .get(position);
+//                File path = new File(Environment.getExternalStorageDirectory(),
+//                        "Duty Day Calculator");
+//                path.mkdir();
+//                File filepath = new File(path, profile.getProfileName()
+//                        + ".txt");
+//                OutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
+//                DataOutputStream out = new DataOutputStream(fos);
+//                profile.exportToReadableFile(out, this);
+//                fos.close();
+//                Toast.makeText(this,
+//                        "Profile saved to:" + '\n' + filepath.toString(),
+//                        Toast.LENGTH_LONG).show();
+//            } catch (Exception e) {
+//                Log.d("SAVE", "save err: " + e.toString());
+//                Toast.makeText(this, "Error Saving Profile - Check Storage Permissions", Toast.LENGTH_SHORT)
+//                        .show();
+//            }
+//        } else {
+//            Toast.makeText(this, "Profile Not Exported - Select Export to Try Again", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MENUEXPORTALL: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //permissions were granted after prompting, perform action again
-                    exportList();
-                } else {
-                    Toast.makeText(this, "Cannot export without Storage Permissions", Toast.LENGTH_SHORT).show();
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        Uri uri = null;
+        if (requestCode == MENUEXPORTALL
+                && resultCode == Activity.RESULT_OK) {
+            // The result data contains a URI for the document or directory that
+            // the user selected.
+            if (resultData != null && resultData.getData() != null) {
+                uri = resultData.getData();
+                // Perform operations on the document using its URI.
+                try {
+                    OutputStream fos = new BufferedOutputStream(getContentResolver().openOutputStream(uri));
+                    DataOutputStream out = new DataOutputStream(fos);
+                    for (ProfileClass profile : OutputActivity.profiles.profileList) {
+                        profile.exportToReadableFile(out, this);
+                    }
+                    out.close();
+                    fos.close();
+                    Toast.makeText(this,
+                            "Profiles Saved", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.d("SAVE", "save err: " + e.toString());
+                    Toast.makeText(this, "Error Saving Profile List", Toast.LENGTH_SHORT)
+                            .show();
                 }
-                return;
             }
-			case MENUEXPORT: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					//permissions were granted after prompting, perform action again
-					exportSingleProfile(contextPos);
-				} else {
-					Toast.makeText(this, "Cannot export without Storage Permissions", Toast.LENGTH_SHORT).show();
-				}
-				contextPos = -1;//reset to avoid double exports
-				return;
-			}
-            case MENUIMPORT: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //permissions were granted after prompting, perform action again
-                    createDialog(FILEDIALOG).show();
+        } else if (requestCode == MENUEXPORT
+                && resultCode == Activity.RESULT_OK) {
+            if (resultData != null && resultData.getData() != null) {
+                uri = resultData.getData();
+                if (contextPos >= 0 && contextPos < OutputActivity.profiles.profileList.size()) {
+                    try {
+                        ProfileClass profile = OutputActivity.profiles.profileList
+                                .get(contextPos);
+                        OutputStream fos = new BufferedOutputStream(getContentResolver().openOutputStream(uri));
+                        DataOutputStream out = new DataOutputStream(fos);
+                        profile.exportToReadableFile(out, this);
+                        fos.close();
+                        Toast.makeText(this,
+                                "Profile saved", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Log.d("SAVE", "save err: " + e.toString());
+                        Toast.makeText(this, "Error Saving Profile", Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 } else {
-                    Toast.makeText(this, "Cannot import without Storage Permissions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Profile Not Exported - Select Export to Try Again", Toast.LENGTH_SHORT).show();
                 }
-                return;
+            }
+        }else if (requestCode == MENUIMPORT
+                && resultCode == Activity.RESULT_OK) {
+            if (resultData != null && resultData.getData() != null) {
+                uri = resultData.getData();
+                try {
+                    InputStream fis = getContentResolver().openInputStream(uri);
+                    OutputActivity.profiles.profileList.addAll(OutputActivity.profiles
+                            .importReadableList(fis, getBaseContext(), this));
+                    Toast.makeText(this,
+                            "Profile imported", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.d("DDC", "import list err " + e.toString());
+                    Toast.makeText(this,
+                            "Error Importing File", Toast.LENGTH_SHORT).show();
+                }
+                //save and update
+                OutputActivity.profiles.exportList(ProfileList.PROFILESTORAGE,
+                        OutputActivity.profiles.profileList, getBaseContext());
+                refresh();
             }
         }
     }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        switch (requestCode) {
+//            case MENUEXPORTALL: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    //permissions were granted after prompting, perform action again
+//                    exportList();
+//                } else {
+//                    Toast.makeText(this, "Cannot export without Storage Permissions", Toast.LENGTH_SHORT).show();
+//                }
+//                return;
+//            }
+//            case MENUEXPORT: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    //permissions were granted after prompting, perform action again
+//                    exportSingleProfile(contextPos);
+//                } else {
+//                    Toast.makeText(this, "Cannot export without Storage Permissions", Toast.LENGTH_SHORT).show();
+//                }
+//                contextPos = -1;//reset to avoid double exports
+//                return;
+//            }
+//            case MENUIMPORT: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    //permissions were granted after prompting, perform action again
+//                    createDialog(FILEDIALOG).show();
+//                } else {
+//                    Toast.makeText(this, "Cannot import without Storage Permissions", Toast.LENGTH_SHORT).show();
+//                }
+//                return;
+//            }
+//        }
+//    }
 
     // Handles all dialogs for this activity
     //these are some variables needed to be accessible by file dialog
-    private String[] fileList;
-    private File path = new File(Environment.getExternalStorageDirectory(),
-            "Duty Day Calculator");
-
+//    private String[] fileList;
+//    private File path = new File(Environment.getExternalStorageDirectory(),
+//            "Duty Day Calculator");
+//
     protected Dialog createDialog(int id) {
         Dialog dialog = null;
         AlertDialog.Builder builder = new Builder(this);
@@ -312,52 +418,52 @@ public class EditorListActivity extends Activity {
                                 "Load Default Profiles? This will overwrite any custom profiles!")
                         .setPositiveButton("Yes", defaultsDialogListener)
                         .setNegativeButton("No", defaultsDialogListener).create();
-            case FILEDIALOG:
-                try {
-                    path.mkdirs();
-                } catch (SecurityException e) {
-                    Log.e("DDC", "unable to write on the sd card " + e.toString());
-                }
-                if (path.exists()) {
-                    FilenameFilter filter = new FilenameFilter() {
-                        public boolean accept(File dir, String filename) {
-                            File sel = new File(dir, filename);
-                            return filename.contains(".txt") || sel.isDirectory();
-                        }
-                    };
-                    fileList = path.list(filter);
-                } else {
-                    Toast.makeText(this, "Unable to access storage - Check Storage Permissions", Toast.LENGTH_SHORT).show();
-                }
-                builder.setTitle("Choose file from folder" + '\n' + "Duty Day Calculator" + '\n');
-                builder.setIcon(android.R.drawable.ic_menu_set_as);
-                if (fileList == null) {
-                    Log.e("DDC", "Showing file picker before loading the file list");
-                    Toast.makeText(this, "Error selecting file - Check Storage Permissions", Toast.LENGTH_SHORT).show();
-                    return dialog;
-                } else if (fileList.length == 0) {
-                    Toast.makeText(this, "No Profiles Found - Place Files into Duty Day Calculator Folder", Toast.LENGTH_SHORT).show();
-                }
-                builder.setItems(fileList, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int position) {
-                        String chosenFile = fileList[position];
-                        File fin = new File(path, chosenFile);
-                        Log.d("FILE", fin.toString());
-                        // import
-                        try {
-                            OutputActivity.profiles.profileList.addAll(OutputActivity.profiles
-                                    .importReadableList(fin, getBaseContext(), EditorListActivity.this));
-                        } catch (Exception e) {
-                            Log.d("DDC", "import list err " + e.toString());
-                        }
-                        //save and update
-                        OutputActivity.profiles.exportList(ProfileList.PROFILESTORAGE,
-                                OutputActivity.profiles.profileList, getBaseContext(), EditorListActivity.this);
-                        refresh();
-                    }
-                });
-                dialog = builder.create();
-                return dialog;
+//            case FILEDIALOG:
+//                try {
+//                    path.mkdirs();
+//                } catch (SecurityException e) {
+//                    Log.e("DDC", "unable to write on the sd card " + e.toString());
+//                }
+//                if (path.exists()) {
+//                    FilenameFilter filter = new FilenameFilter() {
+//                        public boolean accept(File dir, String filename) {
+//                            File sel = new File(dir, filename);
+//                            return filename.contains(".txt") || sel.isDirectory();
+//                        }
+//                    };
+//                    fileList = path.list(filter);
+//                } else {
+//                    Toast.makeText(this, "Unable to access storage - Check Storage Permissions", Toast.LENGTH_SHORT).show();
+//                }
+//                builder.setTitle("Choose file from folder" + '\n' + "Duty Day Calculator" + '\n');
+//                builder.setIcon(android.R.drawable.ic_menu_set_as);
+//                if (fileList == null) {
+//                    Log.e("DDC", "Showing file picker before loading the file list");
+//                    Toast.makeText(this, "Error selecting file - Check Storage Permissions", Toast.LENGTH_SHORT).show();
+//                    return dialog;
+//                } else if (fileList.length == 0) {
+//                    Toast.makeText(this, "No Profiles Found - Place Files into Duty Day Calculator Folder", Toast.LENGTH_SHORT).show();
+//                }
+//                builder.setItems(fileList, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int position) {
+//                        String chosenFile = fileList[position];
+//                        File fin = new File(path, chosenFile);
+//                        Log.d("FILE", fin.toString());
+//                        // import
+//                        try {
+//                            OutputActivity.profiles.profileList.addAll(OutputActivity.profiles
+//                                    .importReadableList(fin, getBaseContext(), EditorListActivity.this));
+//                        } catch (Exception e) {
+//                            Log.d("DDC", "import list err " + e.toString());
+//                        }
+//                        //save and update
+//                        OutputActivity.profiles.exportList(ProfileList.PROFILESTORAGE,
+//                                OutputActivity.profiles.profileList, getBaseContext());
+//                        refresh();
+//                    }
+//                });
+//                dialog = builder.create();
+//                return dialog;
 
             default:
                 return null;// OOOPS!
